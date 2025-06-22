@@ -253,7 +253,9 @@ def consume_openai_stream_to_write_reply(
                 # Ignore function call suggestions after content has been received
                 if assistant_reply["content"] == "":
                     for k in function_call.keys():
-                        function_call[k] += delta["function_call"].get(k) or ""
+                        value = delta["function_call"].get(k)
+                        if value is not None:
+                            function_call[k] += value
                     assistant_reply["function_call"] = function_call
 
         for t in threads:
