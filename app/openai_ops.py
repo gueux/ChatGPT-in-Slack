@@ -513,6 +513,8 @@ def format_assistant_reply(content: str, translate_markdown: bool) -> str:
 def build_system_text(
     system_text_template: str, translate_markdown: bool, context: BoltContext
 ):
+    print(f"system_text_template: {system_text_template}")
+    print(f"bot_user_id: {context.bot_user_id}")
     system_text = system_text_template.format(bot_user_id=context.bot_user_id)
     # Translate format hint in system prompt
     if translate_markdown is True:
