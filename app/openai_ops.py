@@ -219,7 +219,7 @@ def consume_openai_stream_to_write_reply(
             if timeout_seconds < spent_seconds:
                 raise TimeoutError()
             # Some versions of the Azure OpenAI API return an empty choices array in the first chunk
-            if context.get("OPENAI_API_TYPE") == "azure" and not chunk.choices:
+            if not chunk.choices:
                 continue
             item = chunk.choices[0].model_dump()
             if item.get("finish_reason") is not None:
